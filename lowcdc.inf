@@ -1,0 +1,98 @@
+;
+; Windows USB CDC Driver Setup File for AVR-CDC (Windows 10 x64)
+;
+;   Copyright (c) 2008-2009 Recursion Co., Ltd.
+;   Copyright (c) 2016 Artyom Protaskin
+;
+
+[Version] 
+Signature = "$Windows NT$"
+Provider  = %COMPANY%
+DriverVer = 01/10/2016, 1.0.1.4
+
+Class     = Ports
+ClassGuid = {4D36E978-E325-11CE-BFC1-08002BE10318}
+
+CatalogFile = lowcdc.cat
+
+[Manufacturer] 
+%MFGNAME% = Devices, NTamd64
+
+;--------------------------------------------------------------------------
+; Files
+;--------------------------------------------------------------------------
+
+[SourceDisksNames]
+1 = "Install Disk"
+
+[SourceDisksFiles]
+usbser61.sys = 1
+lowcdc.sys   = 1
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+;--------------------------------------------------------------------------
+; Device driver
+;--------------------------------------------------------------------------
+
+[DriverInstall.NTamd64]
+Include = mdmcpq.inf
+CopyFiles = DriverInstall.NTamd64.CopyFiles
+AddReg    = DriverInstall.NTamd64.AddReg
+
+[DriverInstall.NTamd64.CopyFiles]
+usbser61.sys
+lowcdc.sys
+
+[DriverInstall.NTamd64.Services]
+AddService = usbser61, 0x00000002, DriverServiceInst
+AddService = lowcdc, 0x00000000, DriverLower.AddService
+
+[DriverInstall.NTamd64.AddReg]
+HKR, , DevLoader, , *ntkern
+HKR, , NTMPDriver, , usbser61.sys
+HKR, , EnumPropPages32, , "MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.NTamd64.HW]
+AddReg = DriverLower.HW
+
+[DriverLower.HW]
+HKR, , LowerFilters, 0x00010000, "lowcdc"
+
+;--------------------------------------------------------------------------
+; Services
+;--------------------------------------------------------------------------
+
+[DriverServiceInst]
+DisplayName = %SERVICE%
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\usbser61.sys
+LoadOrderGroup = PNP Filter
+
+[DriverLower.AddService]
+DisplayName = %SERVICE2%
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\lowcdc.sys 
+
+;--------------------------------------------------------------------------
+; Devices
+;--------------------------------------------------------------------------
+
+[Devices.NTamd64]
+%DESCRIPTION% = DriverInstall,USB\VID_16C0&PID_05E1
+
+;--------------------------------------------------------------------------
+; Strings
+;--------------------------------------------------------------------------
+
+[Strings] 
+COMPANY = "Recursion Co., Ltd."
+MFGNAME = "www.recursion.jp"
+DESCRIPTION = "Virtual Communications Port"
+SERVICE = "USB RS-232 Emulation Driver"
+SERVICE2 = "Low-Speed CDC Transfer Interface"
