@@ -16,6 +16,8 @@
 
 2. Установите [Windows Driver Kit (WDK) 10](https://msdn.microsoft.com/en-us/windows/hardware/dn913721.aspx). В веб-установщике выберите загрузку WDK для установки на другом компьютере, в противном случае установленный WDK не будет содержать утилиту Inf2Cat, предназначенную для генерации каталога драйвера (замечание действительно для версии 10.0.10586.0). После завершения загрузки дистрибутива выполните установку. Убедитесь, что необходимая утилита присутствует по адресу `\Program Files (x86)\Windows Kits\10\Bin\x86\inf2cat.exe`.
 
+    ![Инсталлятор Windows Driver Kit](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/wdk-installation-screenshot.png)
+
 3. [Включите опцию запуска TESTSIGNING](https://msdn.microsoft.com/en-us/library/windows/hardware/ff553484(v=vs.85).aspx), перезагрузите компьютер. В правом нижнем углу должен отображаться водяной знак, включающий в себя надпись Test Mode, версии Windows и сборки. Будьте осторожны, используя компьютер в режиме Test Mode: загрузчик ОС и ядро загрузят драйверы, подписанные любым сертификатом. 
 
 4. [Создайте каталог драйвера](https://msdn.microsoft.com/en-us/library/windows/hardware/ff540161(v=vs.85).aspx).
@@ -124,6 +126,16 @@ SignTool Error: WinVerifyTrust returned error: 0x800B0101
 ```
 
 Откройте `lowcdc.cat`, сравните время создания сертификата и время подписи. Устраните несоответствие, изменив системные настройки даты и времени. Запустите `createcat.bat` повторно (внимание, не удаляйте копию сертификата, она используется как индикатор повторного запуска, или установите `CreateCert=0`).
+
+# Скриншоты
+
+Информация об установленном драйвере в диспетчере устройств Windows.
+
+![Диспетчер устройств](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/device-manager-screenshot.png)
+
+Проверка работы драйвера на примере программатора MicroProg.
+
+![Программатор MicroProg](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/microprog-screenshot.png)
 
 # Сведения об авторах
 
