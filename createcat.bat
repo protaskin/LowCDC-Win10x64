@@ -19,7 +19,7 @@ if %errorLevel% == 0 (
     echo Success: Administrator privileges are confirmed.
 ) else (
     echo Error: The available privileges are not adequate for the current operation.
-    goto :eof
+    goto end
 )
 
 
@@ -63,3 +63,6 @@ SignTool sign /v /s CA /n "%CertName%" /t http://timestamp.verisign.com/scripts/
 SignTool verify /v /pa "%CatFilePath%"
 
 cd /D %DriverDir%
+
+:end
+pause
