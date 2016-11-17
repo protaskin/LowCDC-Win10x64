@@ -9,6 +9,20 @@
 
 @echo off
 
+:: Checking if the user has administrator privileges
+:: See http://stackoverflow.com/a/11995662 for more information
+
+echo Administrator privileges are required. Detecting privileges...
+
+net session >nul 2>&1
+if %errorLevel% == 0 (
+    echo Success: Administrator privileges are confirmed.
+) else (
+    echo Error: The available privileges are not adequate for the current operation.
+    goto :eof
+)
+
+
 set DriverDir=%~dp0
 set DriverDir=%DriverDir:~0,-1%
 set CatFilePath=%DriverDir%\lowcdc.cat
