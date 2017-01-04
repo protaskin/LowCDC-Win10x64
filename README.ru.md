@@ -6,31 +6,29 @@
 
 1. Инсталляционный скрипт lowcdc.inf не содержит необходимых секций (SourceDisksNames, SourceDisksFiles), отсутствует подписанный каталог драйвера (.cat-файл).
 
-2. [В Windows 10 драйвер последовательного интерфейса через USB — usbser.sys — был переписан](http://blogs.msdn.com/b/usbcoreblog/archive/2015/07/29/what-is-new-with-serial-in-windows-10.aspx), что привело к невозможности его совместного использования с lowcdc.sys.
+2. [В Windows 10 драйвер последовательного интерфейса через USB — usbser.sys — был переписан](https://blogs.msdn.microsoft.com/usbcoreblog/2015/07/29/what-is-new-with-serial-in-windows-10/), что привело к невозможности его совместного использования с lowcdc.sys.
 
-3. [Начиная с Windows 10 можно использовать только драйверы, подписанные сертификатом с расширенной проверкой (EV), прошедшие проверку Hardware Certification Kit, а затем подписанные в Windows Hardware Dev Center Dashboard](http://blogs.msdn.com/b/windows_hardware_certification/archive/2015/04/01/driver-signing-changes-in-windows-10.aspx).
+3. [Начиная с Windows 10 можно использовать только драйверы, подписанные сертификатом с расширенной проверкой (EV), прошедшие проверку Hardware Certification Kit, а затем подписанные в Windows Hardware Dev Center Dashboard](https://blogs.msdn.microsoft.com/windows_hardware_certification/2015/04/01/driver-signing-changes-in-windows-10/).
 
 # Подготовка ОС и драйвера к установке
 
 1. Найдите драйвер `usbser.sys`, входящий в состав 64-битной редации Windows 7. Расположение файла на установочном диске Windows 7 с интегрированным пакетом обновления SP1 `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\usbser.sys`. Версия драйвера, которым воспользовался я — 6.1.7610.17514. Скопируйте файл в директорию драйвера под именем `usbser61.sys`, чтобы избежать замены драйвера Windows 10.
 
-2. Установите [Windows Driver Kit (WDK) 10](https://msdn.microsoft.com/en-us/windows/hardware/dn913721.aspx). В веб-установщике выберите загрузку WDK для установки на другом компьютере, в противном случае установленный WDK не будет содержать утилиту Inf2Cat, предназначенную для генерации каталога драйвера (замечание действительно для версии 10.0.10586.0). После завершения загрузки дистрибутива выполните установку. Убедитесь, что необходимая утилита присутствует по адресу `\Program Files (x86)\Windows Kits\10\Bin\x86\inf2cat.exe`.
+2. Установите [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk) и [Windows Driver Kit (WDK) 10](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). Убедитесь, что утилита `Inf2Cat` присутствует в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x86\`, а утилиты `MakeCert`, `CertMgr`, `SignTool` — в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x64\`.
 
-    ![Инсталлятор Windows Driver Kit](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/wdk-installation-screenshot.png)
+3. [Включите опцию запуска TESTSIGNING](https://msdn.microsoft.com/windows/hardware/drivers/install/the-testsigning-boot-configuration-option), перезагрузите компьютер. В правом нижнем углу должен отображаться водяной знак, включающий в себя надпись Test Mode, версии Windows и сборки. **Будьте осторожны, используя компьютер в режиме Test Mode: загрузчик ОС и ядро загрузят драйверы, подписанные любым сертификатом.**
 
-3. [Включите опцию запуска TESTSIGNING](https://msdn.microsoft.com/en-us/library/windows/hardware/ff553484(v=vs.85).aspx), перезагрузите компьютер. В правом нижнем углу должен отображаться водяной знак, включающий в себя надпись Test Mode, версии Windows и сборки. Будьте осторожны, используя компьютер в режиме Test Mode: загрузчик ОС и ядро загрузят драйверы, подписанные любым сертификатом. 
+4. [Создайте каталог драйвера](https://msdn.microsoft.com/windows/hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
-4. [Создайте каталог драйвера](https://msdn.microsoft.com/en-us/library/windows/hardware/ff540161(v=vs.85).aspx).
-
-5. [Создайте сертификат](https://msdn.microsoft.com/en-us/library/windows/hardware/ff548693(v=vs.85).aspx), [установите его в соответствующие хранилища сертификатов](https://msdn.microsoft.com/en-us/library/windows/hardware/ff553563(v=vs.85).aspx), [подпишите каталог драйвера](https://msdn.microsoft.com/en-us/library/windows/hardware/ff553470(v=vs.85).aspx).
+5. [Создайте сертификат](https://msdn.microsoft.com/windows/hardware/drivers/install/makecert-test-certificate), [установите его в соответствующие хранилища сертификатов](https://msdn.microsoft.com/windows/hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [подпишите каталог драйвера](https://msdn.microsoft.com/windows/hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
 # Использование createcat.bat
 
 Для автоматизации шагов 4-5 создан пакетный файл createcat.bat.
 
-createcat.bat не требует какой-либо настройки и готов к использованию. Вы можете изменить имя сертификата (константа `CertName`), а также использовать уже установленный сертификат (установите константу `CreateCert=0`).
+createcat.bat не требует какой-либо настройки и готов к использованию. Вы можете изменить имя сертификата (переменная `CertName`), а также использовать уже установленный сертификат (измените имя сертификата и установите переменную `CreateCert=0`).
 
-1. Запустите `createcat.bat` из командной строки, запущенной с правами администратора. 
+1. Запустите `createcat.bat` с правами администратора (необязательно запускать из командной строки).
 
 2. Изучите вывод. Ниже приведен результат успешного выполнения.
 
@@ -136,6 +134,10 @@ SignTool Error: WinVerifyTrust returned error: 0x800B0101
 Проверка работы драйвера на примере программатора MicroProg.
 
 ![Программатор MicroProg](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/microprog-screenshot.png)
+
+Проверка работы драйвера на [STK500-совместимом программаторе и AVRISP](https://github.com/protaskin/LowCDC-Win10x64/issues/1#issuecomment-261777640).
+
+![Программатор AVRISP](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/avrisp-screenshot.png)
 
 # Сведения об авторах
 
