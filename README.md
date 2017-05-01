@@ -137,7 +137,7 @@ Communication with the MicroProg programmer.
 
 ![The MicroProg programmer](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/microprog-screenshot.png)
 
-[Communication with the AVRISP programmer](https://github.com/protaskin/LowCDC-Win10x64/issues/1#issuecomment-261777640).
+[Communication with the STK500 compatible programmer](https://github.com/protaskin/LowCDC-Win10x64/issues/1#issuecomment-261777640).
 
 ![The AVPISP programmer](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/avrisp-screenshot.png)
 
