@@ -3,7 +3,7 @@
 :: certificate to the corresponding certificate stores, signs the catalog file
 :: and verifies it.
 ::
-::  (c) Copyright 2016 Artyom Protaskin
+::  (c) Copyright 2016-2017 Artyom Protaskin <a.protaskin@gmail.com>
 ::
 :: Licensed under GNU General Public License version 2 (see LICENSE file).
 

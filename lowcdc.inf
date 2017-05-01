@@ -2,7 +2,7 @@
 ; Windows USB CDC Driver Setup File for AVR-CDC (Windows 10 x64)
 ;
 ;   Copyright (c) 2008-2009 Recursion Co., Ltd.
-;   Copyright (c) 2016 Artyom Protaskin
+;   Copyright (c) 2016-2017 Artyom Protaskin <a.protaskin@gmail.com>
 ;
 
 [Version] 
