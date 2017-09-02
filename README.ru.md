@@ -2,6 +2,14 @@
 
 Данный репозиторий содержит почти все необходимое (за исключением драйвера usbser.sys, на который распространяется действие лицензионного соглашения Windows 7) для установки драйвера lowcdc.sys на 64-битную редакцию Windows 10. Драйвер lowcdc.sys публикуется в неизменном виде, исходные коды доступны на сайте автора.
 
+Драйвер поддерживает следующие устройства:
+
+- AVR-CDC (`USB\VID_16C0&PID_05E1`),
+
+- Digispark (`USB\VID_16D0&PID_087E`).
+
+Используйте теги (tags/releases) для получения стабильных выпусков.
+
 ## Почему драйвер lowcdc.sys не устанавливается на Windows 10?
 
 1. Инсталляционный скрипт lowcdc.inf не содержит необходимых секций (SourceDisksNames, SourceDisksFiles), отсутствует подписанный каталог драйвера (.cat-файл).
@@ -16,11 +24,11 @@
 
 2. Установите [Windows Driver Kit (WDK) 10](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). Убедитесь, что утилита `Inf2Cat` присутствует в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x86\`, а утилиты `MakeCert`, `CertMgr`, `SignTool` — в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x64\`. Если какая-то программа отсутствует, попробуйте установить [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).
 
-3. [Включите опцию запуска TESTSIGNING](https://msdn.microsoft.com/windows/hardware/drivers/install/the-testsigning-boot-configuration-option), перезагрузите компьютер. В правом нижнем углу должен отображаться водяной знак, включающий в себя надпись Test Mode, версии Windows и сборки. **Будьте осторожны, используя компьютер в режиме Test Mode: загрузчик ОС и ядро загрузят драйверы, подписанные любым сертификатом.**
+3. [Включите опцию запуска TESTSIGNING](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), перезагрузите компьютер. В правом нижнем углу должен отображаться водяной знак, включающий в себя надпись Test Mode, версии Windows и сборки. **Будьте осторожны, используя компьютер в режиме Test Mode: загрузчик ОС и ядро загрузят драйверы, подписанные любым сертификатом.**
 
-4. [Создайте каталог драйвера](https://msdn.microsoft.com/windows/hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
+4. [Создайте каталог драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
-5. [Создайте сертификат](https://msdn.microsoft.com/windows/hardware/drivers/install/makecert-test-certificate), [установите его в соответствующие хранилища сертификатов](https://msdn.microsoft.com/windows/hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [подпишите каталог драйвера](https://msdn.microsoft.com/windows/hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
+5. [Создайте сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/makecert-test-certificate), [установите его в соответствующие хранилища сертификатов](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [подпишите каталог драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
 ## Использование createcat.bat
 
@@ -129,7 +137,7 @@ SignTool Error: WinVerifyTrust returned error: 0x800B0101
 
 Информация об установленном драйвере в диспетчере устройств Windows.
 
-![Диспетчер устройств](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/device-manager-screenshot.png)
+![Диспетчер устройств](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/device-manager-screenshot-v1016.png)
 
 Проверка работы драйвера на примере программатора MicroProg.
 

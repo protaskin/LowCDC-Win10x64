@@ -1,6 +1,14 @@
 # LowCDC-Win10x64
 
-This repo contains almost everything (except for the usbser.sys driver because of Microsoft Software License Terms) that is needed to create a lowcdc.sys driver package that can be installed on the 64-bit version of Windows 10. lowcdc.sys is published unchanged, the source code is available on the author's site (see the Credits section).
+This repo contains almost everything (except for the usbser.sys driver because of Microsoft Software License Terms) that is needed to create a lowcdc.sys driver package that can be installed on the 64-bit version of Windows 10. lowcdc.sys is published unchanged, the source code is available on the author's site (see [the Credits section](#credits)).
+
+The driver package supports the following devices:
+
+- AVR-CDC (`USB\VID_16C0&PID_05E1`),
+
+- Digispark (`USB\VID_16D0&PID_087E`).
+
+The master branch can be broken, use tags/releases in order to obtain stable releases.
 
 *I'm not very proficient in English, please consider helping with the translation. You can send a pull request, participate in [the discussion](https://github.com/protaskin/LowCDC-Win10x64/issues/3) or send me an email.*
 
@@ -18,11 +26,11 @@ This repo contains almost everything (except for the usbser.sys driver because o
 
 2. Install [Windows Driver Kit (WDK) 10](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). Make sure that the `Inf2Cat` program is located in the `\Program Files (x86)\Windows Kits\10\Bin\x86\` folder, the programs `MakeCert`, `CertMgr`, `SignTool` are located in the `\Program Files (x86)\Windows Kits\10\Bin\x64\` folder. If any program is missing, try to install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).
 
-3. [Enable the TESTSIGNING boot configuration option](https://msdn.microsoft.com/windows/hardware/drivers/install/the-testsigning-boot-configuration-option), restart the computer for the change to take effect. When the option for test-signing is enabled Windows displays a watermark with the text "Test Mode", the version and build of Windows in the lower right-hand corner of the desktop. **Be aware using Windows with the TESTSIGNING boot configuration option, Windows will load any type of test-signed kernel-mode code.**
+3. [Enable the TESTSIGNING boot configuration option](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), restart the computer for the change to take effect. When the option for test-signing is enabled Windows displays a watermark with the text "Test Mode", the version and build of Windows in the lower right-hand corner of the desktop. **Be aware using Windows with the TESTSIGNING boot configuration option, Windows will load any type of test-signed kernel-mode code.**
 
-4. [Create a catalog file for the driver package](https://msdn.microsoft.com/windows/hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
+4. [Create a catalog file for the driver package](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
-5. [Create a MakeCert test certificate](https://msdn.microsoft.com/windows/hardware/drivers/install/makecert-test-certificate), [install the test certificate to corresponding certificate stores](https://msdn.microsoft.com/windows/hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [test-sign the driver package's catalog file](https://msdn.microsoft.com/windows/hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
+5. [Create a MakeCert test certificate](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/makecert-test-certificate), [install the test certificate to corresponding certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [test-sign the driver package's catalog file](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
 ## Using createcat.bat
 
@@ -131,7 +139,7 @@ Open `lowcdc.cat`, compare the singing time of the catalog file and the value of
 
 The installed driver in Device Manager.
 
-![Device Manager](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/device-manager-screenshot.png)
+![Device Manager](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/device-manager-screenshot-v1016.png)
 
 Communication with the MicroProg programmer.
 
