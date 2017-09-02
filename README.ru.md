@@ -2,7 +2,7 @@
 
 Данный репозиторий содержит почти все необходимое (за исключением драйвера usbser.sys, на который распространяется действие лицензионного соглашения Windows 7) для установки драйвера lowcdc.sys на 64-битную редакцию Windows 10. Драйвер lowcdc.sys публикуется в неизменном виде, исходные коды доступны на сайте автора.
 
-# Почему драйвер lowcdc.sys не устанавливается на Windows 10?
+## Почему драйвер lowcdc.sys не устанавливается на Windows 10?
 
 1. Инсталляционный скрипт lowcdc.inf не содержит необходимых секций (SourceDisksNames, SourceDisksFiles), отсутствует подписанный каталог драйвера (.cat-файл).
 
@@ -10,7 +10,7 @@
 
 3. [Начиная с Windows 10 можно использовать только драйверы, подписанные сертификатом с расширенной проверкой (EV), прошедшие проверку Hardware Certification Kit, а затем подписанные в Windows Hardware Dev Center Dashboard](https://blogs.msdn.microsoft.com/windows_hardware_certification/2015/04/01/driver-signing-changes-in-windows-10/).
 
-# Подготовка ОС и драйвера к установке
+## Подготовка ОС и драйвера к установке
 
 1. Найдите драйвер `usbser.sys`, входящий в состав 64-битной редации Windows 7. Расположение файла на установочном диске Windows 7 с интегрированным пакетом обновления SP1 `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\usbser.sys`. Версия драйвера, которым воспользовался я — 6.1.7610.17514. Скопируйте файл в директорию драйвера под именем `usbser61.sys`, чтобы избежать замены драйвера Windows 10.
 
@@ -22,7 +22,7 @@
 
 5. [Создайте сертификат](https://msdn.microsoft.com/windows/hardware/drivers/install/makecert-test-certificate), [установите его в соответствующие хранилища сертификатов](https://msdn.microsoft.com/windows/hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [подпишите каталог драйвера](https://msdn.microsoft.com/windows/hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
-# Использование createcat.bat
+## Использование createcat.bat
 
 Для автоматизации шагов 4-5 создан пакетный файл createcat.bat.
 
@@ -125,7 +125,7 @@ SignTool Error: WinVerifyTrust returned error: 0x800B0101
 
 Откройте `lowcdc.cat`, сравните время создания сертификата и время подписи. Устраните несоответствие, изменив системные настройки даты и времени. Запустите `createcat.bat` повторно (внимание, не удаляйте копию сертификата, она используется как индикатор повторного запуска, или установите `CreateCert=0`).
 
-# Скриншоты
+## Скриншоты
 
 Информация об установленном драйвере в диспетчере устройств Windows.
 
@@ -139,6 +139,6 @@ SignTool Error: WinVerifyTrust returned error: 0x800B0101
 
 ![Программатор AVRISP](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/avrisp-screenshot.png)
 
-# Сведения об авторах
+## Сведения об авторах
 
 Драйвер lowcdc.sys разработан [Osamu Tamura](http://www.recursion.jp/prose/avrcdc/).
