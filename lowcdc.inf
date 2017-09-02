@@ -8,7 +8,7 @@
 [Version] 
 Signature = "$Windows NT$"
 Provider  = %COMPANY%
-DriverVer = 01/10/2016, 1.0.1.4
+DriverVer = 01/08/2017, 1.0.1.5
 
 Class     = Ports
 ClassGuid = {4D36E978-E325-11CE-BFC1-08002BE10318}
@@ -85,6 +85,7 @@ ServiceBinary = %12%\lowcdc.sys
 
 [Devices.NTamd64]
 %DESCRIPTION% = DriverInstall,USB\VID_16C0&PID_05E1
+%DESCRIPTION2% = DriverInstall,USB\VID_16D0&PID_087E
 
 ;--------------------------------------------------------------------------
 ; Strings
@@ -94,5 +95,6 @@ ServiceBinary = %12%\lowcdc.sys
 COMPANY = "Recursion Co., Ltd."
 MFGNAME = "www.recursion.jp"
 DESCRIPTION = "Virtual Communications Port"
+DESCRIPTION2 = "Digispark Virtual Com Port"
 SERVICE = "USB RS-232 Emulation Driver"
 SERVICE2 = "Low-Speed CDC Transfer Interface"
