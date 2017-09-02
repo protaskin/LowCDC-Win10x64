@@ -8,7 +8,7 @@
 [Version]
 Signature = "$Windows NT$"
 Provider  = %COMPANY%
-DriverVer = 01/08/2017, 1.0.1.5
+DriverVer = 09/02/2017, 1.0.1.6
 
 Class     = Ports
 ClassGuid = {4D36E978-E325-11CE-BFC1-08002BE10318}
