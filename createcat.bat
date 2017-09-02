@@ -51,7 +51,7 @@ if %CreateCert% equ 1 (
         :: Adding the test certificate to the Trusted Root CA certificate store
         CertMgr /add "%CertCopyFilePath%" /s /r localMachine root
 
-        :: Adding the test certificate to the Trusted Publishers certificate store 
+        :: Adding the test certificate to the Trusted Publishers certificate store
         CertMgr /add "%CertCopyFilePath%" /s /r localMachine trustedpublisher
     )
 )

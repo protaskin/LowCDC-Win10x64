@@ -5,7 +5,7 @@
 ;   Copyright (c) 2016-2017 Artyom Protaskin <a.protaskin@gmail.com>
 ;
 
-[Version] 
+[Version]
 Signature = "$Windows NT$"
 Provider  = %COMPANY%
 DriverVer = 01/08/2017, 1.0.1.5
@@ -15,7 +15,7 @@ ClassGuid = {4D36E978-E325-11CE-BFC1-08002BE10318}
 
 CatalogFile = lowcdc.cat
 
-[Manufacturer] 
+[Manufacturer]
 %MFGNAME% = Devices, NTamd64
 
 ;--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ DisplayName = %SERVICE2%
 ServiceType = 1
 StartType = 3
 ErrorControl = 1
-ServiceBinary = %12%\lowcdc.sys 
+ServiceBinary = %12%\lowcdc.sys
 
 ;--------------------------------------------------------------------------
 ; Devices
@@ -91,7 +91,7 @@ ServiceBinary = %12%\lowcdc.sys
 ; Strings
 ;--------------------------------------------------------------------------
 
-[Strings] 
+[Strings]
 COMPANY = "Recursion Co., Ltd."
 MFGNAME = "www.recursion.jp"
 DESCRIPTION = "Virtual Communications Port"
