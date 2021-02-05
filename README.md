@@ -22,7 +22,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 ## Getting Windows and the driver package ready
 
-1. Find `usbser.sys` included in the 64-bit version of Windows 7. The file is located in the `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\` folder on the installation disk of Windows 7 with integrated SP1. The version of the driver I use is 6.1.7610.17514. Copy the file to the driver package's folder and rename it to `usbser61.sys` to avoid replacement of the Windows 10 driver.
+1. Find `usbser.sys` included in the 64-bit version of Windows 7. The file is located in the `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\` folder on the installation disk of Windows 7 with integrated SP1. The version of the driver I use is 6.1.7601.17514. Copy the file to the driver package's folder and rename it to `usbser61.sys` to avoid replacement of the Windows 10 driver.
 
 2. Install [Windows Driver Kit (WDK) 10](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). Make sure that the `Inf2Cat` program is located in the `\Program Files (x86)\Windows Kits\10\Bin\x86\` folder, the programs `MakeCert`, `CertMgr`, `SignTool` are located in the `\Program Files (x86)\Windows Kits\10\Bin\x64\` folder. If any program is missing, try to install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).
 
