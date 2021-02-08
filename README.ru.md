@@ -14,15 +14,15 @@
 
 1. Инсталляционный скрипт lowcdc.inf не содержит необходимых секций (SourceDisksNames, SourceDisksFiles), отсутствует подписанный каталог драйвера (.cat-файл).
 
-2. [В Windows 10 драйвер последовательного интерфейса через USB — usbser.sys — был переписан](https://blogs.msdn.microsoft.com/usbcoreblog/2015/07/29/what-is-new-with-serial-in-windows-10/), что привело к невозможности его совместного использования с lowcdc.sys.
+2. [В Windows 10 драйвер последовательного интерфейса через USB — usbser.sys — был переписан](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855), что привело к невозможности его совместного использования с lowcdc.sys.
 
-3. [Начиная с Windows 10 можно использовать только драйверы, подписанные сертификатом с расширенной проверкой (EV), прошедшие проверку Hardware Certification Kit, а затем подписанные в Windows Hardware Dev Center Dashboard](https://blogs.msdn.microsoft.com/windows_hardware_certification/2015/04/01/driver-signing-changes-in-windows-10/).
+3. [Начиная с Windows 10 можно использовать только драйверы, подписанные сертификатом с расширенной проверкой (EV), прошедшие проверку Hardware Certification Kit, а затем подписанные в Windows Hardware Dev Center Dashboard](https://techcommunity.microsoft.com/t5/windows-hardware-certification/driver-signing-changes-in-windows-10/ba-p/364859).
 
 ## Подготовка ОС и драйвера к установке
 
 1. Найдите драйвер `usbser.sys`, входящий в состав 64-битной редации Windows 7. Расположение файла на установочном диске Windows 7 с интегрированным пакетом обновления SP1 `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\usbser.sys`. Версия драйвера, которым воспользовался я — 6.1.7601.17514. Скопируйте файл в директорию драйвера под именем `usbser61.sys`, чтобы избежать замены драйвера Windows 10.
 
-2. Установите [Windows Driver Kit (WDK) 10](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). Убедитесь, что утилита `Inf2Cat` присутствует в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x86\`, а утилиты `MakeCert`, `CertMgr`, `SignTool` — в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x64\`. Если какая-то программа отсутствует, попробуйте установить [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).
+2. Установите [Windows Driver Kit (WDK) 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk). Убедитесь, что утилита `Inf2Cat` присутствует в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x86\`, а утилиты `MakeCert`, `CertMgr`, `SignTool` — в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x64\`. Если какая-то программа отсутствует, попробуйте установить [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/).
 
 3. [Включите опцию запуска TESTSIGNING](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), перезагрузите компьютер. В правом нижнем углу должен отображаться водяной знак, включающий в себя надпись Test Mode, версии Windows и сборки. **Будьте осторожны, используя компьютер в режиме Test Mode: загрузчик ОС и ядро загрузят драйверы, подписанные любым сертификатом.**
 

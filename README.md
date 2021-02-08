@@ -14,15 +14,15 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 1. The lowcdc.inf installation script does not contain necessary sections (SourceDisksNames, SourceDisksFiles), the driver package does not contain a signed catalog file.
 
-2. **[usbser.sys has been completely re-written in Windows 10](https://blogs.msdn.microsoft.com/usbcoreblog/2015/07/29/what-is-new-with-serial-in-windows-10/) and cannot be used with the current version of the lowcdc.sys.**
+2. **[usbser.sys has been completely re-written in Windows 10](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855) and cannot be used with the current version of the lowcdc.sys.**
 
-3. [Beginning with the release of Windows 10, all new Windows 10 kernel mode drivers must be submitted to and digitally signed by the Windows Hardware Developer Center Dashboard portal](https://blogs.msdn.microsoft.com/windows_hardware_certification/2015/04/01/driver-signing-changes-in-windows-10/).
+3. [Beginning with the release of Windows 10, all new Windows 10 kernel mode drivers must be submitted to and digitally signed by the Windows Hardware Developer Center Dashboard portal](https://techcommunity.microsoft.com/t5/windows-hardware-certification/driver-signing-changes-in-windows-10/ba-p/364859).
 
 ## Getting Windows and the driver package ready
 
 1. Find `usbser.sys` included in the 64-bit version of Windows 7. The file is located in the `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\` folder on the installation disk of Windows 7 with integrated SP1. The version of the driver I use is 6.1.7601.17514. Copy the file to the driver package's folder and rename it to `usbser61.sys` to avoid replacement of the Windows 10 driver.
 
-2. Install [Windows Driver Kit (WDK) 10](https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit). Make sure that the `Inf2Cat` program is located in the `\Program Files (x86)\Windows Kits\10\Bin\x86\` folder, the programs `MakeCert`, `CertMgr`, `SignTool` are located in the `\Program Files (x86)\Windows Kits\10\Bin\x64\` folder. If any program is missing, try to install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).
+2. Install [Windows Driver Kit (WDK) 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk). Make sure that the `Inf2Cat` program is located in the `\Program Files (x86)\Windows Kits\10\Bin\x86\` folder, the programs `MakeCert`, `CertMgr`, `SignTool` are located in the `\Program Files (x86)\Windows Kits\10\Bin\x64\` folder. If any program is missing, try to install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/).
 
 3. [Enable the TESTSIGNING boot configuration option](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), restart the computer for the change to take effect. When the option for test-signing is enabled Windows displays a watermark with the text "Test Mode", the version and build of Windows in the lower right-hand corner of the desktop. **Be aware using Windows with the TESTSIGNING boot configuration option, Windows will load any type of test-signed kernel-mode code.**
 
