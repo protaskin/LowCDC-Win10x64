@@ -10,8 +10,6 @@ The driver package supports the following devices:
 
 The master branch can be broken, use tags/releases in order to obtain stable releases.
 
-*I'm not very proficient in English, please consider helping with the translation. You can send a pull request, participate in [the discussion](https://github.com/protaskin/LowCDC-Win10x64/issues/3) or send me an email.*
-
 ## Why does not the lowcdc.sys driver install/work on Windows 10?
 
 1. The lowcdc.inf installation script does not contain necessary sections (SourceDisksNames, SourceDisksFiles), the driver package does not contain a signed catalog file.
