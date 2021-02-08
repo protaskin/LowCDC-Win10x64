@@ -124,7 +124,9 @@ C:\Program Files (x86)\Windows Kits\10\bin\x64>cd /D D:\LowCDC-Win10x64
 
 createcat.bat generates the test-signed catalog file `lowcdc.cat` and creates the `certcopy.cer` file that contains a copy of the certificate.
 
-A common issue that can be encountered is the 0x800B0101 error.
+## Troubleshooting
+
+### Error 0x800B0101
 
 ```
 SignTool Error: WinVerifyTrust returned error: 0x800B0101
