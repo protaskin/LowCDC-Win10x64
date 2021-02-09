@@ -4,7 +4,7 @@ LowCDC-Win10x64 aims to provide instructions on how to create a lowcdc.sys drive
 
 The lowcdc.sys driver is developed by Osamu Tamura and published unchanged. The source code is available on [the author's site](#credits).
 
-The driver package supports the following devices:
+The following devices are supported:
 
 - AVR-CDC (`USB\VID_16C0&PID_05E1`),
 
@@ -12,21 +12,21 @@ The driver package supports the following devices:
 
 The master branch can be broken, use tags/releases in order to obtain stable releases.
 
-## Why does not the lowcdc.sys driver install/work on Windows 10?
+## Why do not existing lowcdc.sys driver packages install/work on Windows 10?
 
-1. The lowcdc.inf installation script does not contain necessary sections (SourceDisksNames, SourceDisksFiles), the driver package does not contain a signed catalog file.
+- The lowcdc.inf installation script does not contain necessary sections (SourceDisksNames, SourceDisksFiles), the driver package does not contain a signed catalog file.
 
-2. **[usbser.sys has been completely re-written in Windows 10](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855) and cannot be used with the current version of the lowcdc.sys.**
+- **[usbser.sys has been completely re-written in Windows 10](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855) and cannot be used with the current version of the lowcdc.sys.**
 
-3. [Beginning with the release of Windows 10, all new Windows 10 kernel mode drivers must be submitted to and digitally signed by the Windows Hardware Developer Center Dashboard portal](https://techcommunity.microsoft.com/t5/windows-hardware-certification/driver-signing-changes-in-windows-10/ba-p/364859).
+- [Beginning with the release of Windows 10, all new Windows 10 kernel mode drivers must be submitted to and digitally signed by the Windows Hardware Developer Center Dashboard portal](https://techcommunity.microsoft.com/t5/windows-hardware-certification/driver-signing-changes-in-windows-10/ba-p/364859).
 
-## Getting Windows and the driver package ready
+## Getting Windows and a driver package ready
 
 1. Find `usbser.sys` included in the 64-bit version of Windows 7. The file is located in the `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\` folder on the installation disk of Windows 7 with integrated SP1. The version of the driver I use is 6.1.7601.17514. Copy the file to the driver package's folder and rename it to `usbser61.sys` to avoid replacement of the Windows 10 driver.
 
-2. Install [Windows Driver Kit (WDK) 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk). Make sure that the `Inf2Cat` program is located in the `\Program Files (x86)\Windows Kits\10\Bin\x86\` folder, the programs `MakeCert`, `CertMgr`, `SignTool` are located in the `\Program Files (x86)\Windows Kits\10\Bin\x64\` folder. If any program is missing, try to install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/).
+2. Install [Windows Driver Kit (WDK) 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) (ignore the Visual Studio and Windows SDK requirements). Make sure that the `Inf2Cat` program is located in the `\Program Files (x86)\Windows Kits\10\Bin\x86\` folder, the programs `MakeCert`, `CertMgr`, `SignTool` are located in the `\Program Files (x86)\Windows Kits\10\Bin\x64\` folder. If any program is missing, try to install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/).
 
-3. [Enable the TESTSIGNING boot configuration option](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), restart the computer for the change to take effect. When the option for test-signing is enabled Windows displays a watermark with the text "Test Mode", the version and build of Windows in the lower right-hand corner of the desktop. **Be aware using Windows with the TESTSIGNING boot configuration option, Windows will load any type of test-signed kernel-mode code.**
+3. [Enable the TESTSIGNING boot configuration option](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), restart the computer for the change to take effect. When the option for test-signing is enabled, Windows displays a watermark with the text "Test Mode", the version and build of Windows in the lower right-hand corner of the desktop. **Be aware using Windows with the TESTSIGNING boot configuration option, Windows will load any type of test-signed kernel-mode code.**
 
 4. [Create a catalog file for the driver package](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
@@ -36,7 +36,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 createcat.bat is a script that generates a test-signed catalog file for the driver package (performs the actions 4 and 5 from the list above).
 
-The script does not need any configuration and ready for use. However you can change the name of a certificate (the `CertName` variable) or use an installed certificate (change the `CertName` variable, set `CreateCert=0`).
+The script does not need any configuration and is ready for use. However you can change the name of a certificate (the `CertName` variable) or use an installed certificate (change the `CertName` variable, set `CreateCert=0`).
 
 1. Run `createcat.bat` with the administrative permissions (it is not necessary to run the script in the command prompt).
 

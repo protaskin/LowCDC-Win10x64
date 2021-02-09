@@ -2,9 +2,9 @@
 
 LowCDC-Win10x64 стремится предоставить инструкции о том, как создать пакет драйвера lowcdc.sys для 64-битной версии Windows 10. Этот репозиторий содержит почти все необходимое (за исключением драйвера usbser.sys из-за ограничений лицензионного соглашения Windows 7) для достижения этой цели.
 
-Драйвер lowcdc.sys разработан Osamu Tamura и публикуется без изменений. Исходные коды доступны на [сайте автора](#credits).
+Драйвер lowcdc.sys разработан Osamu Tamura и публикуется без изменений. Исходные коды доступны на [сайте автора](#сведения-об-авторах).
 
-Драйвер поддерживает следующие устройства:
+Поддерживаются cледующие устройства:
 
 - AVR-CDC (`USB\VID_16C0&PID_05E1`),
 
@@ -12,25 +12,25 @@ LowCDC-Win10x64 стремится предоставить инструкции
 
 Используйте теги (tags/releases) для получения стабильных выпусков.
 
-## Почему драйвер lowcdc.sys не устанавливается на Windows 10?
+## Почему существующие пакеты драйвера lowcdc.sys не устанавливаются/работают на Windows 10?
 
-1. Инсталляционный скрипт lowcdc.inf не содержит необходимых секций (SourceDisksNames, SourceDisksFiles), отсутствует подписанный каталог драйвера (.cat-файл).
+- Инсталляционный скрипт lowcdc.inf не содержит необходимых секций (SourceDisksNames, SourceDisksFiles), отсутствует подписанный каталог пакета драйвера (.cat-файл).
 
-2. [В Windows 10 драйвер последовательного интерфейса через USB — usbser.sys — был переписан](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855), что привело к невозможности его совместного использования с lowcdc.sys.
+- [В Windows 10 драйвер последовательного интерфейса через USB — usbser.sys — был переписан](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855), что привело к невозможности его совместного использования с lowcdc.sys.
 
-3. [Начиная с Windows 10 можно использовать только драйверы, подписанные сертификатом с расширенной проверкой (EV), прошедшие проверку Hardware Certification Kit, а затем подписанные в Windows Hardware Dev Center Dashboard](https://techcommunity.microsoft.com/t5/windows-hardware-certification/driver-signing-changes-in-windows-10/ba-p/364859).
+- [Начиная с Windows 10 можно использовать только драйверы, подписанные сертификатом с расширенной проверкой (EV), прошедшие проверку Hardware Certification Kit, а затем подписанные в Windows Hardware Dev Center Dashboard](https://techcommunity.microsoft.com/t5/windows-hardware-certification/driver-signing-changes-in-windows-10/ba-p/364859).
 
-## Подготовка ОС и драйвера к установке
+## Подготовка ОС и пакета драйвера к установке
 
-1. Найдите драйвер `usbser.sys`, входящий в состав 64-битной редации Windows 7. Расположение файла на установочном диске Windows 7 с интегрированным пакетом обновления SP1 `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\usbser.sys`. Версия драйвера, которым воспользовался я — 6.1.7601.17514. Скопируйте файл в директорию драйвера под именем `usbser61.sys`, чтобы избежать замены драйвера Windows 10.
+1. Найдите драйвер `usbser.sys`, входящий в состав 64-битной редации Windows 7. Расположение файла на установочном диске Windows 7 с интегрированным пакетом обновления SP1 `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\usbser.sys`. Версия драйвера, которым пользуюсь я — 6.1.7601.17514. Скопируйте файл в директорию пакета драйвера под именем `usbser61.sys`, чтобы избежать замены драйвера Windows 10.
 
-2. Установите [Windows Driver Kit (WDK) 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk). Убедитесь, что утилита `Inf2Cat` присутствует в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x86\`, а утилиты `MakeCert`, `CertMgr`, `SignTool` — в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x64\`. Если какая-то программа отсутствует, попробуйте установить [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/).
+2. Установите [Windows Driver Kit (WDK) 10](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) (проигнорируйте требования установки Visual Studio и Windows SDK). Убедитесь, что утилита `Inf2Cat` присутствует в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x86\`, а утилиты `MakeCert`, `CertMgr`, `SignTool` — в каталоге `\Program Files (x86)\Windows Kits\10\Bin\x64\`. Если какая-то программа отсутствует, попробуйте установить [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/).
 
 3. [Включите опцию запуска TESTSIGNING](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), перезагрузите компьютер. В правом нижнем углу должен отображаться водяной знак, включающий в себя надпись Test Mode, версии Windows и сборки. **Будьте осторожны, используя компьютер в режиме Test Mode: загрузчик ОС и ядро загрузят драйверы, подписанные любым сертификатом.**
 
-4. [Создайте каталог драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
+4. [Создайте каталог для пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
-5. [Создайте сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/makecert-test-certificate), [установите его в соответствующие хранилища сертификатов](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [подпишите каталог драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
+5. [Создайте сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/makecert-test-certificate), [установите его в соответствующие хранилища сертификатов](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [подпишите каталог пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
 ## Использование createcat.bat
 
@@ -124,13 +124,13 @@ Number of errors: 0
 C:\Program Files (x86)\Windows Kits\10\bin\x64>cd /D D:\LowCDC-Win10x64
 </pre>
 
-После выполнения пакетного файла в директории драйвера появятся подписанный каталог драйвера `lowcdc.cat` и копия созданного сертификата `certcopy.cer`.
+После выполнения пакетного файла в директории пакета драйвера появятся подписанный каталог пакета драйвера `lowcdc.cat` и копия созданного сертификата `certcopy.cer`.
 
 ## Устранение проблем
 
 ### Ошибка 0x800B0101
 
-Завершение проверки каталога драйвера ошибкой `0x800B0101` означает, что время создания сертификата (системное время компьютера) опережает время подписи (полученное с удаленного сервера).
+Завершение проверки каталога пакета драйвера ошибкой `0x800B0101` означает, что время создания сертификата (системное время компьютера) опережает время подписи (полученное с удаленного сервера).
 
 ```
 SignTool Error: WinVerifyTrust returned error: 0x800B0101
