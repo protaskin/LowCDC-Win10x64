@@ -1,6 +1,6 @@
 # LowCDC-Win10x64
 
-LowCDC-Win10x64 aims to provide instructions on how to create a lowcdc.sys driver package for the 64-bit version of Windows 10. This repo contains almost everything needed (except for the usbser.sys driver because of the limitations of Microsoft Software License Terms) to accomplish this.
+This repo aims to provide instructions on how to create a lowcdc.sys driver package for the 64-bit version of Windows 10 and contains almost everything needed (except for the usbser.sys driver because of the limitations of Microsoft Software License Terms) to accomplish this.
 
 The lowcdc.sys driver is developed by Osamu Tamura and published unchanged. The source code is available on [the author's site](#credits).
 
@@ -12,7 +12,7 @@ The following devices are supported:
 
 The master branch can be broken, use tags/releases in order to obtain stable releases.
 
-## Why do not existing lowcdc.sys driver packages install/work on Windows 10?
+## Why do existing lowcdc.sys driver packages not install/work on Windows 10?
 
 - The lowcdc.inf installation script does not contain necessary sections (SourceDisksNames, SourceDisksFiles), the driver package does not contain a signed catalog file.
 
