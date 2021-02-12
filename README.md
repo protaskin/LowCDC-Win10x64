@@ -42,7 +42,9 @@ The script does not need any configuration and is ready for use. However you can
 
 1. Run `createcat.bat` with the administrative permissions (it is not necessary to run the script in the command prompt).
 
-2. Examine the output. The text below is the result of a successful execution.
+2. Enter the Windows 10 SDK and WDK version number if included in the path to the programs.
+
+3. Examine the output. The text below is the result of a successful execution (slightly obsolete).
 
 <pre>
 D:\LowCDC-Win10x64>createcat.bat

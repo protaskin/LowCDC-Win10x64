@@ -3,11 +3,12 @@
 :: certificate to the corresponding certificate stores, signs the catalog file
 :: and verifies it.
 ::
-::  (c) Copyright 2016-2017 Artyom Protaskin <a.protaskin@gmail.com>
+::  (c) Copyright 2016-2021 Artyom Protaskin <a.protaskin@gmail.com>
 ::
 :: Licensed under GNU General Public License version 2 (see LICENSE file).
 
 @echo off
+setlocal EnableDelayedExpansion
 
 :: Checking if the user has administrator privileges
 :: See http://stackoverflow.com/a/11995662 for more information
@@ -20,6 +21,19 @@ if %errorLevel% == 0 (
 ) else (
     echo Error: The available privileges are not adequate for the current operation.
     goto end
+)
+
+
+:: Appending a version number if entered
+set KitsBinDir=%ProgramFiles(x86)%\Windows Kits\10\Bin
+dir "%KitsBinDir%" /A:D & echo.
+set /p Version=Enter the Windows 10 SDK and WDK version number if included in the path to the programs: || set "Version="
+if not "%Version%" == "" (
+    set "KitsBinDir=%KitsBinDir%\%Version%"
+    if not exist !KitsBinDir! (
+        echo Error: The directory !KitsBinDir! does not exist.
+        goto end
+    )
 )
 
 
@@ -39,7 +53,7 @@ set CertCopyFilePath=%DriverDir%\certcopy.cer
 @echo on
 
 :: Creating a catalog file for the driver package
-cd /D %ProgramFiles(x86)%\Windows Kits\10\Bin\x86
+cd /D %KitsBinDir%\x86
 Inf2Cat /driver:"%DriverDir%" /os:10_X64
 
 cd ..\x64
