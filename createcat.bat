@@ -19,7 +19,7 @@ set NormalScheme=[0m
 echo Administrator privileges are required. Detecting privileges...
 
 net session >nul 2>&1
-if %errorLevel% == 0 (
+if %ErrorLevel% == 0 (
     echo Success: Administrator privileges are confirmed.
 ) else (
     echo %ErrorScheme%Error: The available privileges are not adequate for the current operation.%NormalScheme%
@@ -60,7 +60,7 @@ cd /D %KitsBinDir%\x86
 Inf2Cat /driver:"%DriverDir%" /os:10_X64
 
 cd ..\x64
-if %CreateCert% equ 1 (
+if %CreateCert% == 1 (
     if not exist "%CertCopyFilePath%" (
         :: Creating a test certificate
         MakeCert -r -pe -ss CA -n "CN=%CertName%" "%CertCopyFilePath%"
