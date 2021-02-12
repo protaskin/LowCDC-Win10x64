@@ -10,6 +10,9 @@
 @echo off
 setlocal EnableDelayedExpansion
 
+set ErrorScheme=[97m[41m
+set NormalScheme=[0m
+
 :: Checking if the user has administrator privileges
 :: See http://stackoverflow.com/a/11995662 for more information
 
@@ -19,7 +22,7 @@ net session >nul 2>&1
 if %errorLevel% == 0 (
     echo Success: Administrator privileges are confirmed.
 ) else (
-    echo Error: The available privileges are not adequate for the current operation.
+    echo %ErrorScheme%Error: The available privileges are not adequate for the current operation.%NormalScheme%
     goto end
 )
 
@@ -31,7 +34,7 @@ set /p Version=Enter the Windows 10 SDK and WDK version number if included in th
 if not "%Version%" == "" (
     set "KitsBinDir=%KitsBinDir%\%Version%"
     if not exist !KitsBinDir! (
-        echo Error: The directory !KitsBinDir! does not exist.
+        echo %ErrorScheme%Error: The directory !KitsBinDir! does not exist.%NormalScheme%
         goto end
     )
 )
