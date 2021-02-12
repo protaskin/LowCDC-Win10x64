@@ -24,7 +24,7 @@
 
 1. Найдите драйвер `usbser.sys`, входящий в состав 64-разрядной версии Windows 7. Расположение файла на установочном диске Windows 7 с интегрированным пакетом обновления SP1 `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\usbser.sys`. Номер версии драйвера, которым пользуюсь я — 6.1.7601.17514. Скопируйте файл в директорию пакета драйвера под именем `usbser61.sys`, чтобы избежать замены драйвера Windows 10.
 
-2. Установите [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/) и [Windows Driver Kit (WDK)](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) с одним номером версии. Убедитесь, что утилита `Inf2Cat.exe` присутствует в директории `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x86`, а утилиты `MakeCert.exe`, `CertMgr.exe`, `SignTool.exe` — в директории `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x64`. Обратите внимание, что более ранние установки наборов средств разработки не включали номер версии в пути к утилитам.
+2. Установите [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/) и [Windows Driver Kit (WDK)](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) с одним номером версии. Убедитесь, что утилита `Inf2Cat.exe` присутствует в директории `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x86`, а утилиты `MakeCert.exe`, `CertMgr.exe`, `SignTool.exe` — в директории `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x64`. Обратите внимание, что более ранние установки наборов средств разработки не включали номер версии в пути к исполняемым файлам утилит.
 
    Существует метод, проверенный с версией 10.0.19041.685 Windows 10 SDK и WDK, который позволяет установить в основном необходимое ПО. Выберите загрузку для установки на другом компьютере вместо установки наборов средств разработки. По завершении загрузки запустите `Windows SDK for Windows Store Apps Tools-x86_en-us.msi`, `Windows SDK Signing Tools-x86_en-us.msi` и `Windows Driver Kit Binaries-x86_en-us.msi` из директорий `Installers`.
 
@@ -42,7 +42,7 @@ createcat.bat не требует какой-либо настройки и го
 
 1. Запустите `createcat.bat` с правами администратора (необязательно запускать из командной строки).
 
-2. Введите номер версии Windows 10 SDK и WDK, если он включен в путь к утилитам.
+2. Введите номер версии Windows 10 SDK и WDK, если он включен в путь к исполняемым файлам утилит.
 
 3. Изучите вывод. Ниже приведен результат успешного выполнения (слегка устаревший).
 

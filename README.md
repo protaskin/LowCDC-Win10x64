@@ -24,7 +24,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 1. Find `usbser.sys` included in the 64-bit version of Windows 7. The file is located in the `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8` directory on the installation disk of Windows 7 with integrated SP1. The version number of the driver I use is 6.1.7601.17514. Copy the file to the driver package's directory and rename it to `usbser61.sys` to avoid replacement of the Windows 10 driver.
 
-2. Install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/) and [Windows Driver Kit (WDK)](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) with the same version number. Make sure that the `Inf2Cat.exe` program is located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x86` directory, the programs `MakeCert.exe`, `CertMgr.exe`, `SignTool.exe` are located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x64` directory. Note that earlier installations of the kits did not include a version number in the path to the programs.
+2. Install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/) and [Windows Driver Kit (WDK)](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) with the same version number. Make sure that the `Inf2Cat.exe` tool is located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x86` directory, the `MakeCert.exe`, `CertMgr.exe`, `SignTool.exe` tools are located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x64` directory. Note that earlier installations of the kits did not include a version number in the path to the tools executables.
 
    There is also a workaround, which has been tested with the 10.0.19041.685 version of Windows 10 SDK and WDK, to install mostly necessary software. Choose to download the kits for installation on a separate computer instead of installing them. When the download is complete, run `Windows SDK for Windows Store Apps Tools-x86_en-us.msi`, `Windows SDK Signing Tools-x86_en-us.msi` and `Windows Driver Kit Binaries-x86_en-us.msi` from the `Installers` directories.
 
@@ -42,7 +42,7 @@ The script does not need any configuration and is ready for use. However you can
 
 1. Run `createcat.bat` with the administrative permissions (it is not necessary to run the script in the command prompt).
 
-2. Enter the Windows 10 SDK and WDK version number if included in the path to the programs.
+2. Enter the Windows 10 SDK and WDK version number if included in the path to the tools executables.
 
 3. Examine the output. The text below is the result of a successful execution (slightly obsolete).
 
