@@ -58,7 +58,7 @@ set CreateCert=1
 :: The path to the file that will contain a copy of the created test certificate
 set CertCopyFilePath=%DriverDir%\certcopy.cer
 
-@echo on
+echo on
 
 :: Creating a catalog file for the driver package
 cd /D %KitsBinDir%\x86
