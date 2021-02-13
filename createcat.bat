@@ -79,7 +79,7 @@ if %CreateCert% == 1 (
 )
 
 :: Test-signing the catalog file
-SignTool sign /v /s CA /n "%CertName%" /t http://timestamp.verisign.com/scripts/timstamp.dll "%CatFilePath%"
+SignTool sign /v /s CA /n "%CertName%" /t http://timestamp.digicert.com "%CatFilePath%"
 
 :: Verifying the signature of the test-signed catalog file
 SignTool verify /v /pa "%CatFilePath%"
