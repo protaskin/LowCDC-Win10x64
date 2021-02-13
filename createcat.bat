@@ -29,7 +29,12 @@ if %ErrorLevel% == 0 (
 
 :: Appending a version number if entered
 set KitsBinDir=%ProgramFiles(x86)%\Windows Kits\10\Bin
-dir "%KitsBinDir%" /A:D & echo.
+
+echo on
+dir "%KitsBinDir%" /A:D
+@echo off
+echo.
+
 set /p Version=Enter the Windows 10 SDK and WDK version number if included in the path to the tools executables: || set "Version="
 if not "%Version%" == "" (
     set "KitsBinDir=%KitsBinDir%\%Version%"
