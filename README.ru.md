@@ -32,7 +32,7 @@
 
 4. [Создайте каталог для пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
-5. [Создайте сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/makecert-test-certificate), [установите его в соответствующие хранилища сертификатов](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [подпишите каталог пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
+5. [Создайте сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates), [установите его в соответствующие хранилища сертификатов](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [подпишите каталог пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
 ## Использование createcat.bat
 

@@ -32,7 +32,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 4. [Create a catalog file for the driver package](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
-5. [Create a MakeCert test certificate](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/makecert-test-certificate), [install the test certificate to corresponding certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [test-sign the driver package's catalog file](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
+5. [Create a MakeCert test certificate](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates), [install the test certificate to corresponding certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [test-sign the driver package's catalog file](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
 ## Using createcat.bat
 
