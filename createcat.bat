@@ -87,4 +87,4 @@ SignTool verify /v /pa "%CatFilePath%"
 cd /D %DriverDir%
 
 :end
-pause
+@pause
