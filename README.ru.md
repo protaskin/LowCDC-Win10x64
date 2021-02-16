@@ -28,7 +28,7 @@
 
    Существует метод, проверенный с версией 10.0.19041.685 Windows 10 SDK и WDK, который позволяет установить в основном необходимое ПО. Выберите загрузку для установки на другом компьютере вместо установки наборов средств разработки. По завершении загрузки запустите `Windows SDK for Windows Store Apps Tools-x86_en-us.msi`, `Windows SDK Signing Tools-x86_en-us.msi` и `Windows Driver Kit Binaries-x86_en-us.msi` из директорий `Installers`.
 
-3. [Включите опцию запуска TESTSIGNING](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), перезагрузите компьютер. В правом нижнем углу должен отображаться водяной знак, включающий в себя надпись Test Mode, номера версии и сборки Windows. **Будьте осторожны, используя компьютер в режиме Test Mode: загрузчик ОС и ядро загрузят драйверы, подписанные любым сертификатом.**
+3. [Включите опцию запуска TESTSIGNING](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), перезагрузите компьютер. В правом нижнем углу должен отображаться водяной знак, включающий в себя надпись Test Mode, номера версии и сборки Windows. **Будьте осторожны, используя компьютер в режиме Test Mode: Windows загрузит драйверы, подписанные любым сертификатом.**
 
 4. [Создайте каталог для пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
