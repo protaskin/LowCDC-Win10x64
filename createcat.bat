@@ -68,7 +68,7 @@ cd ..\x64
 if %CreateCert% == 1 (
     if not exist "%CertCopyFilePath%" (
         :: Creating a test certificate
-        MakeCert -r -pe -ss CA -n "CN=%CertName%" -eku 1.3.6.1.5.5.7.3.3 "%CertCopyFilePath%"
+        MakeCert -r -pe -ss MY -n "CN=%CertName%" -eku 1.3.6.1.5.5.7.3.3 "%CertCopyFilePath%"
 
         :: Adding the test certificate to the Trusted Root CA certificate store
         CertMgr /add "%CertCopyFilePath%" /s /r localMachine root
@@ -79,7 +79,7 @@ if %CreateCert% == 1 (
 )
 
 :: Test-signing the catalog file
-SignTool sign /v /s CA /n "%CertName%" /t http://timestamp.digicert.com "%CatFilePath%"
+SignTool sign /v /s MY /n "%CertName%" /t http://timestamp.digicert.com "%CatFilePath%"
 
 :: Verifying the signature of the test-signed catalog file
 SignTool verify /v /pa "%CatFilePath%"
