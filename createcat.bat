@@ -67,7 +67,7 @@ Inf2Cat /driver:"%DriverDir%" /os:10_X64
 cd ..\x64
 if %CreateCert% == 1 (
     if not exist "%CertCopyFilePath%" (
-        :: Creating a test certificate
+        :: Creating a test certificate and adding it to the Current User/Personal certificate store
         MakeCert -r -pe -ss My -n "CN=%CertName%" -eku 1.3.6.1.5.5.7.3.3 "%CertCopyFilePath%"
 
         :: Adding the test certificate to the Trusted Root CA certificate store
