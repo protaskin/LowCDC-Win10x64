@@ -22,7 +22,9 @@
 
 ## Подготовка ОС и пакета драйвера к установке
 
-1. Найдите драйвер `usbser.sys`, входящий в состав 64-разрядной версии Windows 7. Расположение файла на установочном диске Windows 7 с интегрированным пакетом обновления SP1 `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\usbser.sys`. Номер версии драйвера, которым пользуюсь я — 6.1.7601.17514. Скопируйте файл в директорию пакета драйвера под именем `usbser61.sys`, чтобы избежать замены драйвера Windows 10.
+0. Скачайте [последний релиз](https://github.com/protaskin/LowCDC-Win10x64/releases) LowCDC-Win10x64 и распакуйте содержимое архива куда-нибудь на вашем компьютере.
+
+1. Найдите драйвер `usbser.sys`, входящий в состав 64-разрядной версии Windows 7. Расположение файла на установочном диске Windows 7 с интегрированным пакетом обновления SP1 `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8\usbser.sys`. Номер версии драйвера, которым пользуюсь я — 6.1.7601.17514. Скопируйте файл в директорию с файлами LowCDC-Win10x64 — директорию пакета драйвера — под именем `usbser61.sys`, чтобы избежать возможной замены встроенного драйвера Windows 10.
 
 2. Установите [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/) и [Windows Driver Kit (WDK)](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) с одним номером версии. Убедитесь, что утилита `Inf2Cat.exe` присутствует в директории `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x86`, а утилиты `MakeCert.exe`, `CertMgr.exe`, `SignTool.exe` — в директории `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x64`. Обратите внимание, что более ранние установки наборов средств разработки не включали номер версии в пути к исполняемым файлам утилит.
 
@@ -32,11 +34,15 @@
 
 4. [Создайте каталог для пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
-5. [Создайте сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates), [установите его в соответствующие хранилища сертификатов](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [подпишите каталог пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
+5. [Создайте сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates).
+
+6. [Установите его в соответствующие хранилища сертификатов](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
+
+7. [Подпишите каталог пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
 ## Использование createcat.bat
 
-Для автоматизации шагов 4-5 создан пакетный файл createcat.bat.
+Для автоматизации шагов с 4-го по 7-й включительно создан пакетный файл createcat.bat.
 
 createcat.bat не требует какой-либо настройки и готов к использованию. Вы можете изменить имя сертификата (переменная `CertName`), а также использовать уже установленный сертификат (измените имя сертификата и установите переменную `CreateCert=0`).
 

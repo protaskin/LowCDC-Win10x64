@@ -22,7 +22,9 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 ## Getting Windows and a driver package ready
 
-1. Find `usbser.sys` included in the 64-bit version of Windows 7. The file is located in the `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8` directory on the installation disk of Windows 7 with integrated SP1. The version number of the driver I use is 6.1.7601.17514. Copy the file to the driver package's directory and rename it to `usbser61.sys` to avoid replacement of the Windows 10 driver.
+0. Download [the latest release](https://github.com/protaskin/LowCDC-Win10x64/releases) of LowCDC-Win10x64 and extract the contents somewhere on your computer.
+
+1. Find `usbser.sys` included in the 64-bit version of Windows 7. The file is located in the `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8` directory on the installation disk of Windows 7 with integrated SP1. The version number of the driver I use is 6.1.7601.17514. Copy the file to the directory with the LowCDC-Win10x64 files in it—your driver package directory—and rename it to `usbser61.sys` to avoid possible replacement of the Windows 10 in-box driver.
 
 2. Install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/) and [Windows Driver Kit (WDK)](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) with the same version number. Make sure that the `Inf2Cat.exe` tool is located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x86` directory, the `MakeCert.exe`, `CertMgr.exe`, `SignTool.exe` tools are located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x64` directory. Note that earlier installations of the kits did not include a version number in the path to the tools executables.
 
@@ -32,15 +34,19 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 4. [Create a catalog file for the driver package](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
-5. [Create a MakeCert test certificate](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates), [install the test certificate to corresponding certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer), [test-sign the driver package's catalog file](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
+5. [Create a MakeCert test certificate](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates).
+
+6. [Install the test certificate to corresponding certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
+
+7. [Test-sign the driver package's catalog file](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
 ## Using createcat.bat
 
-createcat.bat is a script that generates a test-signed catalog file for the driver package (performs the actions 4 and 5 from the list above).
+createcat.bat is a batch file that generates a test-signed catalog file for the driver package (performs the steps 4 through 7, inclusive, from the list above).
 
-The script does not need any configuration and is ready for use. However you can change the name of a certificate (the `CertName` variable) or use an installed certificate (change the `CertName` variable, set `CreateCert=0`).
+The batch file does not need any configuration and is ready for use. However you can change the name of a certificate (the `CertName` variable) or use an installed certificate (change the `CertName` variable, set `CreateCert=0`).
 
-1. Run `createcat.bat` with the administrative permissions (it is not necessary to run the script in the command prompt).
+1. Run `createcat.bat` with the administrative permissions (it is not necessary to run the batch file in the command prompt).
 
 2. Enter the Windows 10 SDK and WDK version number if included in the path to the tools executables.
 
