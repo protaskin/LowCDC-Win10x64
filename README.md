@@ -40,6 +40,8 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 7. [Test-sign the driver package's catalog file](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
+8. Delete the private key associated with the test certificate (optional). **Because the test certificate has been added to the Trusted Root CA and Trusted Publishers certificate stores, you must destroy the private key, so that it cannot be reused by an attacker to sign malicious applications.**
+
 ## Using createcat.bat
 
 createcat.bat is a batch file that generates a test-signed catalog file for the driver package (performs the steps 4 through 7, inclusive, from the list above).
