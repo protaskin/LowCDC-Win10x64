@@ -44,7 +44,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 ## Using createcat.bat
 
-createcat.bat is a batch file that generates a test-signed catalog file for the driver package (performs the steps 4 through 7, inclusive, from the list above).
+createcat.bat is a batch file that generates a test-signed catalog file for the driver package (performs the steps 4 through 8, inclusive, from the list above).
 
 The batch file does not need any configuration and is ready for use. However you can change the name of a certificate (the `CertName` variable) or use an installed certificate (change the `CertName` variable, set `CreateCert=0`).
 
@@ -173,7 +173,7 @@ SignTool Error: WinVerifyTrust returned error: 0x800B0101
         A required certificate is not within its validity period when verifying against the current system clock or the timestamp in the signed file.
 ```
 
-Open `lowcdc.cat`, compare the singing time of the catalog file and the value of the certificate's 'valid from'. Adjust the system clock. Run `createcat.bat` again (do not delete `certcopy.cer`, the file is used to determine whether the certificate has been created and added to the certificate stores, otherwise set `CreateCert=0`).
+Open `lowcdc.cat`, compare the singing time of the catalog file and the value of the certificate's 'valid from'. Adjust the system clock. Run `createcat.bat` again.
 
 ## Screenshots
 

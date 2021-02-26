@@ -66,16 +66,14 @@ Inf2Cat /driver:"%DriverDir%" /os:10_X64
 
 cd ..\x64
 if %CreateCert% == 1 (
-    if not exist "%CertCopyFilePath%" (
-        :: Creating a test certificate and adding it to the Current User/Personal certificate store
-        MakeCert -r -pe -ss My -n "CN=%CertName%" -eku 1.3.6.1.5.5.7.3.3 "%CertCopyFilePath%"
+    :: Creating a test certificate and adding it to the Current User/Personal certificate store
+    MakeCert -r -pe -ss My -n "CN=%CertName%" -sk "%CertName%" -eku 1.3.6.1.5.5.7.3.3 "%CertCopyFilePath%"
 
-        :: Adding the test certificate to the Trusted Root CA certificate store
-        CertMgr /add "%CertCopyFilePath%" /s /r localMachine Root
+    :: Adding the test certificate to the Trusted Root CA certificate store
+    CertMgr /add "%CertCopyFilePath%" /s /r localMachine Root
 
-        :: Adding the test certificate to the Trusted Publishers certificate store
-        CertMgr /add "%CertCopyFilePath%" /s /r localMachine TrustedPublisher
-    )
+    :: Adding the test certificate to the Trusted Publishers certificate store
+    CertMgr /add "%CertCopyFilePath%" /s /r localMachine TrustedPublisher
 )
 
 :: Test-signing the catalog file
@@ -83,6 +81,14 @@ SignTool sign /v /s My /n "%CertName%" /t http://timestamp.digicert.com "%CatFil
 
 :: Verifying the signature of the test-signed catalog file
 SignTool verify /v /pa "%CatFilePath%"
+
+if %CreateCert% == 1 (
+    :: Deleting the private key
+    CertUtil -user -delkey "%CertName%"
+
+    :: Deleting the test certificate from the Personal certificate store
+    CertMgr -del -c -n "%CertName%" -s -r CurrentUser My
+)
 
 cd /D %DriverDir%
 
