@@ -7,7 +7,6 @@
 Поддерживаются следующие устройства:
 
 - AVR-CDC (`USB\VID_16C0&PID_05E1`),
-
 - Digispark (`USB\VID_16D0&PID_087E`).
 
 Используйте теги (tags/releases) для получения стабильных выпусков.
@@ -34,9 +33,9 @@
 
 4. [Создайте каталог для пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
-5. [Создайте сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates).
+5. [Создайте тестовый сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates).
 
-6. [Установите его в соответствующие хранилища сертификатов](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
+6. [Установите тестовый сертификат в хранилища сертификатов «Доверенные корневые центры сертификации» и «Доверенные издатели»](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
 
 7. [Подпишите каталог пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
@@ -44,7 +43,7 @@
 
 ## Использование createcat.bat
 
-Для автоматизации шагов с 4-го по 8-й включительно создан пакетный файл createcat.bat.
+Пакетный файл createcat.bat предназначен для автоматизации шагов с 4-го по 8-й включительно.
 
 createcat.bat не требует какой-либо настройки и готов к использованию. Вы можете изменить имя сертификата (переменная `CertName`), а также использовать уже установленный сертификат (измените имя сертификата и установите переменную `CreateCert=0`).
 
@@ -193,4 +192,4 @@ SignTool Error: WinVerifyTrust returned error: 0x800B0101
 
 ## Сведения об авторах
 
-Драйвер lowcdc.sys разработан [Osamu Tamura](http://www.recursion.jp/prose/avrcdc/).
+Драйвер lowcdc.sys разработан [Osamu Tamura @ Recursion Co., Ltd.](http://www.recursion.jp/prose/avrcdc/)

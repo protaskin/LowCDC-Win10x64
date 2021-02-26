@@ -7,7 +7,6 @@ The lowcdc.sys driver is developed by Osamu Tamura and published unchanged. The 
 The following devices are supported:
 
 - AVR-CDC (`USB\VID_16C0&PID_05E1`),
-
 - Digispark (`USB\VID_16D0&PID_087E`).
 
 The master branch can be broken, use tags/releases in order to obtain stable releases.
@@ -16,7 +15,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 - The lowcdc.inf installation script does not contain necessary sections (SourceDisksNames, SourceDisksFiles), the driver package does not contain a signed catalog file.
 
-- **[usbser.sys has been completely re-written in Windows 10](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855) and cannot be used with the current version of the lowcdc.sys.**
+- **[usbser.sys has been completely re-written in Windows 10](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855) and cannot be used with the current version of lowcdc.sys.**
 
 - [Beginning with the release of Windows 10, all new Windows 10 kernel mode drivers must be submitted to and digitally signed by the Windows Hardware Developer Center Dashboard portal](https://techcommunity.microsoft.com/t5/windows-hardware-certification/driver-signing-changes-in-windows-10/ba-p/364859).
 
@@ -36,7 +35,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 5. [Create a MakeCert test certificate](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates).
 
-6. [Install the test certificate to corresponding certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
+6. [Install the test certificate to the Trusted Root CA and Trusted Publishers certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
 
 7. [Test-sign the driver package's catalog file](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
@@ -44,7 +43,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 ## Using createcat.bat
 
-createcat.bat is a batch file that generates a test-signed catalog file for the driver package (performs the steps 4 through 8, inclusive, from the list above).
+createcat.bat is a batch file that generates a test-signed catalog file for a driver package, i.e. performs the steps 4 through 8, inclusive, from the list above.
 
 The batch file does not need any configuration and is ready for use. However you can change the name of a certificate (the `CertName` variable) or use an installed certificate (change the `CertName` variable, set `CreateCert=0`).
 
@@ -162,7 +161,7 @@ C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64>cd /D D:\LowCDC-Win1
 Press any key to continue . . .
 </pre>
 
-createcat.bat generates the test-signed catalog file `lowcdc.cat` and creates the `certcopy.cer` file that contains a copy of the certificate.
+createcat.bat has generated the test-signed catalog file `lowcdc.cat` and created the `certcopy.cer` file that contains a copy of the certificate.
 
 ## Troubleshooting
 
@@ -173,11 +172,11 @@ SignTool Error: WinVerifyTrust returned error: 0x800B0101
         A required certificate is not within its validity period when verifying against the current system clock or the timestamp in the signed file.
 ```
 
-Open `lowcdc.cat`, compare the singing time of the catalog file and the value of the certificate's 'valid from'. Adjust the system clock. Run `createcat.bat` again.
+Open `lowcdc.cat`, compare the signing time of the catalog file and the 'Valid from' value of the certificate. Adjust the system clock. Run `createcat.bat` again.
 
 ## Screenshots
 
-The installed driver in Device Manager.
+The installed driver details in Device Manager.
 
 ![Device Manager](http://artyom.protaskin.ru/storage/lowcdc-win10x64/pictures/device-manager-screenshot-v1016.png)
 
@@ -191,4 +190,4 @@ Communication with the MicroProg programmer.
 
 ## Credits
 
-lowcdc.sys is developed by [Osamu Tamura](http://www.recursion.jp/prose/avrcdc/).
+lowcdc.sys is developed by [Osamu Tamura @ Recursion Co., Ltd.](http://www.recursion.jp/prose/avrcdc/)
