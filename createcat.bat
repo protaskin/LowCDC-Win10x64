@@ -31,7 +31,7 @@ if %ErrorLevel% == 0 (
 set KitsBinDir=%ProgramFiles(x86)%\Windows Kits\10\Bin
 
 echo on
-dir "%KitsBinDir%" /A:D
+dir "%KitsBinDir%" /a:d
 @echo off
 echo.
 
@@ -61,7 +61,7 @@ set CertCopyFilePath=%DriverDir%\certcopy.cer
 echo on
 
 :: Creating a catalog file for the driver package
-cd /D %KitsBinDir%\x86
+cd /d %KitsBinDir%\x86
 Inf2Cat /driver:"%DriverDir%" /os:10_X64
 
 cd ..\x64
@@ -70,10 +70,10 @@ if %CreateCert% == 1 (
     MakeCert -r -pe -ss My -n "CN=%CertName%" -sk "%CertName%" -eku 1.3.6.1.5.5.7.3.3 "%CertCopyFilePath%"
 
     :: Adding the test certificate to the Trusted Root CA certificate store
-    CertMgr /add "%CertCopyFilePath%" /s /r localMachine Root
+    CertMgr -add "%CertCopyFilePath%" -s -r LocalMachine Root
 
     :: Adding the test certificate to the Trusted Publishers certificate store
-    CertMgr /add "%CertCopyFilePath%" /s /r localMachine TrustedPublisher
+    CertMgr -add "%CertCopyFilePath%" -s -r LocalMachine TrustedPublisher
 )
 
 :: Test-signing the catalog file
@@ -90,7 +90,7 @@ if %CreateCert% == 1 (
     CertMgr -del -c -n "%CertName%" -s -r CurrentUser My
 )
 
-cd /D %DriverDir%
+cd /d %DriverDir%
 
 :end
 @pause
