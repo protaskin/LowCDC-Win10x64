@@ -35,7 +35,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 5. [Create a MakeCert test certificate](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates).
 
-6. [Install the test certificate to the Trusted Root CA and Trusted Publishers certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
+6. [Install the test certificate to the Trusted Root CA and Trusted Publishers local machine certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
 
 7. [Test-sign the driver package's catalog file](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 

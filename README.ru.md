@@ -35,7 +35,7 @@
 
 5. [Создайте тестовый сертификат](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-test-certificates).
 
-6. [Установите тестовый сертификат в хранилища сертификатов «Доверенные корневые центры сертификации» и «Доверенные издатели»](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
+6. [Установите тестовый сертификат в хранилища сертификатов «Доверенные корневые центры сертификации» и «Доверенные издатели» локального компьютера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/using-certmgr-to-install-test-certificates-on-a-test-computer).
 
 7. [Подпишите каталог пакета драйвера](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
