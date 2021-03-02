@@ -43,7 +43,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 ## Using createcat.bat
 
-createcat.bat is a batch file that generates a test-signed catalog file for a driver package, i.e. performs the steps 4 through 8, inclusive, from the list above.
+createcat.bat is a batch file that generates a test-signed catalog file for a LowCDC-Win10x64 driver package, i.e. performs the steps 4 through 8, inclusive, from the list above.
 
 The batch file does not need any configuration and is ready for use. However you can change the name of a certificate (the `CertName` variable) or use an installed certificate (change the `CertName` variable, set `CreateCert=0`).
 
