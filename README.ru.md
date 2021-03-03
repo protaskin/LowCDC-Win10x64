@@ -11,9 +11,9 @@
 
 Используйте теги (tags/releases) для получения стабильных выпусков.
 
-## Почему существующие пакеты драйвера lowcdc.sys не устанавливаются/работают на Windows 10?
+## Проблемы с существующими пакетами драйвера lowcdc.sys на Windows 10
 
-- Инсталляционный скрипт lowcdc.inf не содержит необходимых секций (SourceDisksNames, SourceDisksFiles), отсутствует подписанный каталог пакета драйвера (.cat-файл).
+- В состав некоторых пакетов драйвера не входит подписанный каталог (.cat-файл). Файл lowcdc.inf может не содержать необходимых секций, таких как SourceDisksNames и SourceDisksFiles.
 
 - [В Windows 10 драйвер последовательного интерфейса через USB — usbser.sys — был переписан](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855), что привело к невозможности его совместного использования с lowcdc.sys.
 

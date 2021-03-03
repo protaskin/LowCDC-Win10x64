@@ -11,9 +11,9 @@ The following devices are supported:
 
 The master branch can be broken, use tags/releases in order to obtain stable releases.
 
-## Why do existing lowcdc.sys driver packages not install/work on Windows 10?
+## Issues with the existing lowcdc.sys driver packages under Windows 10
 
-- The lowcdc.inf installation script does not contain necessary sections (SourceDisksNames, SourceDisksFiles), the driver package does not contain a signed catalog file.
+- Some of these driver packages do not include a signed catalog file. The lowcdc.inf setup information file may not contain necessary sections, such as SourceDisksNames and SourceDisksFiles.
 
 - **[usbser.sys has been completely re-written in Windows 10](https://techcommunity.microsoft.com/t5/microsoft-usb-blog/what-is-new-with-serial-in-windows-10/ba-p/270855) and cannot be used with the current version of lowcdc.sys.**
 
