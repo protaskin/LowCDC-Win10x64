@@ -1,11 +1,11 @@
 :: createcat.bat is a batch file that automatically creates a catalog file for
-:: the lowcdc.sys driver package, creates a test certificate, adds the
-:: certificate to the corresponding certificate stores, signs the catalog file
-:: and verifies it.
+:: a LowCDC-Win10x64 driver package, creates a test certificate, adds the
+:: certificate to the corresponding certificate stores, signs and verifies the
+:: catalog file, deletes the test certificate and associated private key.
 ::
-::  (c) Copyright 2016-2021 Artyom Protaskin <a.protaskin@gmail.com>
+::  Copyright 2016-2021 Artyom Protaskin <a.protaskin@gmail.com>
 ::
-:: Licensed under GNU General Public License version 2 (see LICENSE file).
+:: Licensed under the GNU General Public License version 2 (see the LICENSE file).
 
 @echo off
 setlocal EnableDelayedExpansion
