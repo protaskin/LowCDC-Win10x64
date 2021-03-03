@@ -209,3 +209,11 @@ SignTool Error: WinVerifyTrust returned error: 0x800B0101
 ## Сведения об авторах
 
 Драйвер lowcdc.sys разработан [Osamu Tamura @ Recursion Co., Ltd.](http://www.recursion.jp/prose/avrcdc/)
+
+## Лицензия
+
+Авторские права 2016-2021 Артём Протаскин
+
+Этот документ доступен по [лицензии Creative Commons «Attribution» («Атрибуция») 4.0 Всемирная](http://creativecommons.org/licenses/by/4.0/).
+
+[![Лицензия Creative Commons](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
