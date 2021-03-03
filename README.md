@@ -19,17 +19,17 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 - [Beginning with the release of Windows 10, all new Windows 10 kernel mode drivers must be submitted to and digitally signed by the Windows Hardware Developer Center Dashboard portal](https://techcommunity.microsoft.com/t5/windows-hardware-certification/driver-signing-changes-in-windows-10/ba-p/364859).
 
-## Getting Windows and a driver package ready
+## Using LowCDC-Win10x64
 
-0. Download [the latest release](https://github.com/protaskin/LowCDC-Win10x64/releases) of LowCDC-Win10x64 and extract the contents somewhere on your computer.
+### Preparing and test-signing a driver package
 
-1. Find `usbser.sys` included in the 64-bit version of Windows 7. The file is located in the `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8` directory on the installation disk of Windows 7 with integrated SP1. The version number of the driver I use is 6.1.7601.17514. Copy the file to the directory with the LowCDC-Win10x64 files in it—your driver package directory—and rename it to `usbser61.sys` to avoid possible replacement of the Windows 10 in-box driver.
+1. Download [the latest release](https://github.com/protaskin/LowCDC-Win10x64/releases) of LowCDC-Win10x64 and extract the contents somewhere on your computer.
 
-2. Install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/) and [Windows Driver Kit (WDK)](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) with the same version number. Make sure that the `Inf2Cat.exe` tool is located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x86` directory, the `MakeCert.exe`, `CertMgr.exe`, `SignTool.exe` tools are located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x64` directory. Note that earlier installations of the kits did not include a version number in the path to the tools executables.
+2. Find `usbser.sys` included in the 64-bit version of Windows 7. The file is located in the `\Sources\install.wim\Windows\System32\DriverStore\FileRepository\mdmcpq.inf_amd64_neutral_fbc4a14a6a13d0c8` directory on the installation disk of Windows 7 with integrated SP1. The version number of the driver I use is 6.1.7601.17514. Copy the file to the directory with the LowCDC-Win10x64 files in it—your driver package directory—and rename it to `usbser61.sys` to avoid possible replacement of the Windows 10 in-box driver.
+
+3. Install [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk/) and [Windows Driver Kit (WDK)](https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) with the same version number. Make sure that the `Inf2Cat.exe` tool is located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x86` directory, the `MakeCert.exe`, `CertMgr.exe`, `SignTool.exe` tools are located in the `\Program Files (x86)\Windows Kits\10\Bin\%Version%\x64` directory. Note that earlier installations of the kits did not include a version number in the path to the tools executables.
 
    There is also a workaround, which has been tested with the 10.0.19041.685 version of Windows 10 SDK and WDK, to install mostly necessary software. Choose to download the kits for installation on a separate computer instead of installing them. When the download is complete, run `Windows SDK for Windows Store Apps Tools-x86_en-us.msi`, `Windows SDK Signing Tools-x86_en-us.msi` and `Windows Driver Kit Binaries-x86_en-us.msi` from the `Installers` directories.
-
-3. [Enable the TESTSIGNING boot configuration option](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), restart the computer for the change to take effect. When the option for test-signing is enabled, Windows displays a watermark with the text "Test Mode", the version and build numbers of Windows in the lower right-hand corner of the desktop. **Be aware using Windows with the TESTSIGNING boot configuration option, Windows will load drivers that are signed by any certificate.**
 
 4. [Create a catalog file for the driver package](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/creating-a-catalog-file-for-a-pnp-driver-package).
 
@@ -41,9 +41,17 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 8. Delete the private key associated with the test certificate (optional). **Because the test certificate has been added to the Trusted Root CA and Trusted Publishers certificate stores, you must destroy the private key, so that it cannot be reused by an attacker to sign malicious applications.**
 
+### Using the test-signed driver package
+
+1. [Enable the TESTSIGNING boot configuration option](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), restart the computer for the change to take effect. When the option for test-signing is enabled, Windows displays a watermark with the text "Test Mode", the version and build numbers of Windows in the lower right-hand corner of the desktop. **Be aware using Windows with the TESTSIGNING boot configuration option, Windows will load drivers that are signed by any certificate.**
+
+2. To use the test-signed driver package on another computer, [install the test certificate to the corresponding certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/installing-a-test-certificate-on-a-test-computer) using the Certificate Import Wizard or the CertMgr tool.
+
+3. Install the driver package.
+
 ## Using createcat.bat
 
-createcat.bat is a batch file that generates a test-signed catalog file for a LowCDC-Win10x64 driver package, i.e. performs the steps 4 through 8, inclusive, from the list above.
+createcat.bat is a batch file that generates a test-signed catalog file for a LowCDC-Win10x64 driver package, i.e. performs the steps 4 through 8, inclusive, from the [Preparing and test-signing a driver package](#preparing-and-test-signing-a-driver-package) section.
 
 The batch file does not need any configuration and is ready for use. However you can change the name of a certificate (the `CertName` variable) or use an installed certificate (change the `CertName` variable, set `CreateCert=0`).
 
