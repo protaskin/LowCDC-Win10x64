@@ -6,8 +6,10 @@ The lowcdc.sys driver is developed by Osamu Tamura and published unchanged. The 
 
 The following devices are supported:
 
-- AVR-CDC (`USB\VID_16C0&PID_05E1`),
-- Digispark (`USB\VID_16D0&PID_087E`).
+Device    | Hardware ID
+--------- | -----------------------
+AVR-CDC   | `USB\VID_16C0&PID_05E1`
+Digispark | `USB\VID_16D0&PID_087E`
 
 The master branch can be broken, use tags/releases in order to obtain stable releases.
 
