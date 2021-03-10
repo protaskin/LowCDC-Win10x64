@@ -15,7 +15,7 @@ The master branch can be broken, use tags/releases in order to obtain stable rel
 
 ## Caution
 
-**Using bulk transfers by low-speed devices is NOT allowed by the USB 1.1 standard. Use at your own risk.**
+**⚠️ Using bulk transfers by low-speed devices is NOT allowed by the USB 1.1 standard. Use at your own risk.**
 
 There is an increasing number of reports that indicate compatibility issues between AVR-CDC devices and [the USB 3.0 driver stack](https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/usb-3-0-driver-stack-architecture#usb-30-driver-stack) of Windows 10. Before trying to create or install a LowCDC-Win10x64 driver package make sure that the USB device has been successfully enumerated and [assigned a hardware identifier (ID)](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/step-1--the-new-device-is-identified). Learn more about [hardware ID and how to find it for a given device](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/hardware-ids).
 
@@ -47,11 +47,11 @@ There is an increasing number of reports that indicate compatibility issues betw
 
 7. [Test-sign the driver package's catalog file](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/test-signing-a-driver-package-s-catalog-file).
 
-8. Delete the private key associated with the test certificate (optional). **Because the test certificate has been added to the Trusted Root CA and Trusted Publishers certificate stores, you must destroy the private key, so that it cannot be reused by an attacker to sign malicious applications.**
+8. Delete the private key associated with the test certificate (optional). **⚠️ Because the test certificate has been added to the Trusted Root CA and Trusted Publishers certificate stores, you must destroy the private key, so that it cannot be reused by an attacker to sign malicious applications.**
 
 ### Using the test-signed driver package
 
-1. [Enable the TESTSIGNING boot configuration option](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), restart the computer for the change to take effect. When the option for test-signing is enabled, Windows displays a watermark with the text "Test Mode", the version and build numbers of Windows in the lower right-hand corner of the desktop. **Be aware using Windows with the TESTSIGNING boot configuration option, Windows will load drivers that are signed by any certificate.**
+1. [Enable the TESTSIGNING boot configuration option](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option), restart the computer for the change to take effect. When the option for test-signing is enabled, Windows displays a watermark with the text "Test Mode", the version and build numbers of Windows in the lower right-hand corner of the desktop. **⚠️ Be aware using Windows with the TESTSIGNING boot configuration option, Windows will load drivers that are signed by any certificate.**
 
 2. To use the test-signed driver package on another computer, [install the test certificate to the corresponding certificate stores](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/installing-a-test-certificate-on-a-test-computer) using the Certificate Import Wizard or the CertMgr tool.
 
