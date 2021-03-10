@@ -13,6 +13,12 @@ Digispark  | `USB\VID_16D0&PID_087E`
 
 Используйте теги (tags/releases) для получения стабильных выпусков.
 
+## Предупреждение
+
+**Использование передач типа Bulk НЕ разрешено стандартом USB1.1. Используйте на свой риск.**
+
+Растет количество отчетов, указывающих на проблемы совместимости устройств AVR-CDC со [стеком драйверов USB 3.0](https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/usb-3-0-driver-stack-architecture#usb-30-driver-stack) в Windows 10. Перед подготовкой пакета драйвера LowCDC-Win10x64 к установке или непосредственно установкой убедитесь, что USB-устройство прошло энумерацию и [ему присвоен идентификатор (ИД) оборудования](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/step-1--the-new-device-is-identified). Узнайте больше об [ИД оборудования и как найти его для устройства](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/hardware-ids).
+
 ## Проблемы с существующими пакетами драйвера lowcdc.sys на Windows 10
 
 - В состав некоторых пакетов драйвера не входит подписанный каталог (.cat-файл). Файл lowcdc.inf может не содержать необходимых секций, таких как SourceDisksNames и SourceDisksFiles.
